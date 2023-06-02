@@ -30,10 +30,15 @@ from cityscapesscripts.preparation.json2labelImg import json2labelImg
 # The main method
 def main():
     # Where to look for Cityscapes
-    if 'CITYSCAPES_DATASET' in os.environ:
-        cityscapesPath = os.environ['CITYSCAPES_DATASET']
-    else:
-        cityscapesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..')
+    # if 'CITYSCAPES_DATASET' in os.environ:
+    #     cityscapesPath = os.environ['CITYSCAPES_DATASET']
+    # else:
+    #     cityscapesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..')
+    # input arguments
+    if len(sys.argv) < 2:
+        print("Usage: python createTrainIdLabelImgs.py cityscapesPath")
+        sys.exit(1)
+    cityscapesPath = sys.argv[1]
     # how to search for all ground truth
     searchFine   = os.path.join( cityscapesPath , "gtFine"   , "*" , "*" , "*_gt*_polygons.json" )
     searchCoarse = os.path.join( cityscapesPath , "gtCoarse" , "*" , "*" , "*_gt*_polygons.json" )
